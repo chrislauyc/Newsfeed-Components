@@ -86,6 +86,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Hello',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `hihihihihihihihihiih `,
+
+    secondParagraph: `byebyebyebyebyebye `,
+
+    thirdParagraph: `good morning good morning good morning good morning good morning good morning`
   }
 ];
 
@@ -102,7 +111,6 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
-
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
@@ -114,3 +122,36 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(article){
+  let div = document.createElement('div');
+  let h2 = document.createElement('h2');
+  let date = document.createElement('p');
+  let p1 = document.createElement('p');
+  let p2 = document.createElement('p');
+  let p3 = document.createElement('p');
+  let span = document.createElement('span');
+
+  h2.textContent = `${article.title}`;
+  date.textContent = `${article.date}`;
+  p1.textContent = `${article.firstParagraph}`;
+  p2.textContent = `${article.secondParagraph}`;
+  p3.textContent = `${article.thirdParagraph}`;
+  span.textContent = '+';
+
+  div.classList.add('article');
+  date.classList.add('date');
+  span.classList.add('expandButton');
+
+  [h2,date,p1,p2,p3,span].forEach((e)=>div.appendChild(e));
+
+  span.addEventListener('click',()=>{
+    div.classList.toggle('article-open');
+  });
+  return div;
+}
+let parent = document.querySelector('div.articles');
+data.forEach((article)=>{
+  let element = articleMaker(article);
+  parent.appendChild(element);
+});
